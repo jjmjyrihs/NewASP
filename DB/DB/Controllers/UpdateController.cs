@@ -61,7 +61,19 @@ namespace DB.Controllers
                     NData.EmployeeID = "null";
                     LData = SI.GetData(NData);
                     Data.CpyName = LData[0].CpyName;
+                    Data.OrderId = ID;
 
+                    int i = 1999;
+                    int j = 1999999;
+                    string ii = "1999";
+                    string jj = "199999999";
+
+                    ii = string.Format("{0:$#,###.##}", ii);
+                    string.Format("{0:$#,###.##}", jj);
+
+
+
+                    SU.Update(Data);
 
                     return null;
                 case "刪除本筆訂單":

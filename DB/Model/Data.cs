@@ -25,5 +25,6 @@ namespace Model
         public string ShipRegion { set; get; }
         public string ShipPostalCode { set; get; }
         public string ShipCountry { set; get; }
+        public string Freight { set; get; }
     }
 }
