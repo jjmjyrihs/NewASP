@@ -1,0 +1,68 @@
+﻿@{
+
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<table style="border:3px #cccccc solid;" cellpadding="10" border="1" align="center">
+    <tr>
+        <td>訂單編號</td>
+        <td>客戶名稱</td>
+        <td>訂購日期</td>
+        <td>發貨日期</td>
+        <td>修改資料</td>
+        <td>刪除訂單</td>
+    </tr>
+    @for (int i = 0; i < ((List<Model.Data>)ViewBag.GetData).Count; i++)
+    {
+
+        <tr>
+            <td>@ViewBag.GetData[i].OrderId</td>
+            <td>@ViewBag.GetData[i].CustName</td>
+            <td>@ViewBag.GetData[i].OrderDate</td>
+            <td>@ViewBag.GetData[i].ShippedDate</td>
+
+            @using (Html.BeginForm("Index", "Update", FormMethod.Post))
+            {
+                <td>
+                    <input type="hidden" name="OrderId" value="@ViewBag.GetData[i].OrderId" />
+                    <input type="hidden" name="CustomerID" value="@ViewBag.GetData[i].CustomerID" />
+                    <input type="hidden" name="CustName" value="@ViewBag.GetData[i].CustName" />
+                    <input type="hidden" name="EmployeeID" value="@ViewBag.GetData[i].EmployeeID" />
+                    <input type="hidden" name="EmpName" value="@ViewBag.GetData[i].EmpName" />
+                    <input type="hidden" name="ShipperID" value="@ViewBag.GetData[i].ShipperID" />
+                    <input type="hidden" name="CpyName" value="@ViewBag.GetData[i].CpyName" />
+                    <input type="hidden" name="OrderDate" value="@ViewBag.GetData[i].OrderDate" />
+                    <input type="hidden" name="RequiredDate" value="@ViewBag.GetData[i].RequiredDate" />
+                    <input type="hidden" name="ShippedDate" value="@ViewBag.GetData[i].ShippedDate" />
+                    <input type="hidden" name="ShipAddress" value="@ViewBag.GetData[i].ShipAddress" />
+                    <input type="hidden" name="ShipCity" value="@ViewBag.GetData[i].ShipCity" />
+                    <input type="hidden" name="ShipRegion" value="@ViewBag.GetData[i].ShipRegion" />
+                    <input type="hidden" name="ShipPostalCode" value="@ViewBag.GetData[i].ShipPostalCode" />
+                    <input type="hidden" name="ShipCountry" value="@ViewBag.GetData[i].ShipCountry" />
+                    <input type="submit" value="修改" />
+                </td>
+            }
+
+            @using (Html.BeginForm("Index", "Delete", FormMethod.Post))
+            {
+                <td>
+                    <input type="hidden" name="OrderId" value="@ViewBag.Data.OrderId" />
+                    <input type="hidden" name="CustName" value="@ViewBag.Data.CustName" />
+                    <input type="hidden" name="EmployeeID" value="@ViewBag.GetData[i].EmployeeID" />
+                    <input type="hidden" name="EmpName" value="@ViewBag.Data.EmpName" />
+                    <input type="hidden" name="ShipperID" value="@ViewBag.Data.ShipperID" />
+                    <input type="hidden" name="CpyName" value="@ViewBag.Data.CpyName" />
+                    <input type="hidden" name="OrderDate" value="@ViewBag.Data.OrderDate" />
+                    <input type="hidden" name="RequiredDate" value="@ViewBag.Data.RequiredDate" />
+                    <input type="hidden" name="ShippedDate" value="@ViewBag.Data.ShippedDate" />
+                    <input type="hidden" name="ID" value="@ViewBag.Data.OrderId" />
+                    <input type="submit" value="刪除" />
+                </td>
+
+            }
+        </tr>
+
+    }
+</table>

@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Index", "Inquire", FormMethod.Post))
+{
+    <table style="border:3px #cccccc solid;" cellpadding="10" border="1" align="center">
+        <tr>
+            <td>訂單編號</td>
+            <td colspan="3">1001</td>
+        </tr>
+        <tr>
+            <td>客戶名稱</td>
+            <td colspan="3">我</td>
+        </tr>
+        <tr>
+            <td>負責員工</td>
+            <td colspan="3">你</td>
+        </tr>
+        <tr>
+            <td>訂單日期</td>
+            <td>22</td>
+            <td>需要日期</td>
+            <td>33</td>
+        </tr>
+        <tr>
+            <td>出貨日期</td>
+            <td>44</td>
+            <td>運費</td>
+            <td>55</td>
+        </tr>
+        <tr>
+            <td>出貨公司名稱</td>
+            <td colspan="3">他</td>
+        </tr>
+        <tr>
+            <td>出貨國家</td>
+            <td>水</td>
+            <td>出貨城市</td>
+            <td>火</td>
+        </tr>
+        <tr>
+            <td>出貨地區</td>
+            <td>金</td>
+            <td>郵遞區號</td>
+            <td>木</td>
+        </tr>
+        <tr>
+            <td>出貨地址</td>
+            <td>土</td>
+            <td>出貨說明</td>
+            <td>好</td>
+        </tr>
+        <tr>
+            <td>訂單金額總計</td>
+            <td colspan="3">50000</td>
+        </tr>
+        <tr>
+            <td>dd</td>
+            <td colspan="3">
+                gg
+                tt
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="javascript:window.history.go(-1);" value="返回上一頁"></td>
+        </tr>
+    </table>
+}

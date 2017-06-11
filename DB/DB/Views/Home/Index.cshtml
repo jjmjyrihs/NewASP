@@ -1,0 +1,67 @@
+﻿@{
+    if (Request.Cookies["cookie"] != null)
+    {
+        ViewBag.Title = "Home Page";
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+    }
+    else
+    {
+        ViewBag.Title = "Home Page";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    function Insert() {
+        location.href = '@Url.Action("Index","Insert")';
+    }
+</script>
+
+@using (Html.BeginForm("Index", "Inquire", FormMethod.Post))
+            {
+    <table style="border:3px #cccccc solid;" cellpadding="10" border="1" align="center">
+        <tr>
+            <td>訂單編號</td>
+            <td>@Html.TextBox("OrderId")</td>
+        </tr>
+        <tr>
+            <td>客戶名稱</td>
+            <td>@Html.TextBox("CustName")</td>
+        </tr>
+        <tr>
+            <td>負責員工</td>
+            <td>@Html.DropDownList("EmployeeID", (List<SelectListItem>)ViewBag.EmpName)</td>
+        </tr>
+        <tr>
+            <td>出貨公司</td>
+            <td>@Html.DropDownList("ShipperID", (List<SelectListItem>)ViewBag.CpyName)</td>
+        </tr>
+        <tr>
+            <td>訂購日期</td>
+            <td>
+                <input type="date" name="OrderDate" />
+            </td>
+        </tr>
+        <tr>
+            <td>需要日期</td>
+            <td>
+                <input type="date" name="RequiredDate" />
+            </td>
+        </tr>
+        <tr>
+            <td>出貨日期</td>
+            <td>
+                <input type="date" name="ShippedDate" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="新增訂單" onclick="Insert()" />
+            </td>
+            <td>
+                <input type="submit" value="查詢" />
+                <input type="reset" value="清除" />
+            </td>
+        </tr>
+    </table>
+}

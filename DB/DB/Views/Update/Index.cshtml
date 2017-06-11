@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Update", "Update", FormMethod.Post))
+{
+    <table style="border:3px #cccccc solid; text-align:center" cellpadding="10" border="1" align="center">
+        <tr>
+            <td>訂單編號</td>
+            <td colspan="3">@ViewBag.Data.OrderId</td>
+        </tr>
+        <tr>
+            <td>客戶名稱</td>
+            <td colspan="3">@Html.DropDownList("CustName", (List<SelectListItem>)ViewBag.Cust)</td>
+        </tr>
+        <tr>
+            <td>負責員工</td>
+            <td colspan="3">@Html.DropDownList("EmpName", (List<SelectListItem>)ViewBag.EmpName)</td>
+        </tr>
+        <tr>
+            <td>訂單日期</td>
+            <td><input type="date" name="OrderDate" value="@ViewBag.Data.OrderDate" />
+            <td>需要日期</td>
+            <td><input type="date" name="RequiredDate" value="@ViewBag.Data.RequiredDate" /></td>
+        </tr>
+        <tr>
+            <td>出貨日期</td>
+            <td><input type="date" name="ShippedDate" value="@ViewBag.Data.ShippedDate" /></td>
+            <td>運費</td>
+            <td><input type="text" value="500" /></td>
+        </tr>
+        <tr>
+            <td>出貨公司名稱</td>
+            <td colspan="3">@Html.DropDownList("CpyName", (List<SelectListItem>)ViewBag.CpyName, new { value = "test" })</td>
+        </tr>
+        <tr>
+            <td>出貨國家</td>
+            <td>@Html.TextBox("ShipCountry")</td>
+            <td>出貨城市</td>
+            <td>@Html.TextBox("ShipCity")</td>
+        </tr>
+        <tr>
+            <td>出貨地區</td>
+            <td>@Html.TextBox("ShipRegion")</td>
+            <td>郵遞區號</td>
+            <td>@Html.TextBox("ShipPostalCode")</td>
+        </tr>
+        <tr>
+            <td>出貨地址</td>
+            <td>@Html.TextBox("ShipAddress")</td>
+            <td>出貨說明</td>
+            <td>@Html.TextBox("Content")</td>
+        </tr>
+        <tr>
+            <td>訂單金額總計</td>
+            <td align="right" colspan="3">50000</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" name="ID" value="@ViewBag.Data.OrderId" />
+                <input type="hidden" name="CustomerID" value="@ViewBag.Data.CustomerID" />
+                <input type="hidden" name="EmployeeID" value="@ViewBag.Data.EmployeeID" />
+                <input type="hidden" name="ShipperID" value="@ViewBag.Data.ShipperID" />
+            </td>
+            <td><input type="button" onclick="javascript:window.history.go(-1);" value="返回上一頁"></td>
+            <td colspan="3">
+                <input type="submit" name="submit" value="存檔" />
+                <input type="submit" name="submit" value="刪除本筆訂單" />
+            </td>
+        </tr>
+    </table>
+}
