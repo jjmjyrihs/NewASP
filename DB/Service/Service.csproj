@@ -48,6 +48,7 @@
     <Compile Include="SQL_Inquire_Cpy.cs" />
     <Compile Include="SQL_Inquire_Cust.cs" />
     <Compile Include="SQL_Inquire_Emp.cs" />
+    <Compile Include="SQL_Inquire_Pdt.cs" />
     <Compile Include="SQL_Update.cs" />
   </ItemGroup>
   <ItemGroup>

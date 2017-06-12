@@ -102,6 +102,7 @@ namespace Service
                             RequiredDate = Convert.ToDateTime(row["RequiredDate"]).ToString("yyyy-MM-dd"),
                             ShippedDate = "無",
 
+                            Freight = row["Freight"].ToString(),
                             ShipAddress = row["ShipAddress"].ToString(),
                             ShipCity = row["ShipCity"].ToString(),
                             ShipCountry = row["ShipCountry"].ToString(),
@@ -126,6 +127,7 @@ namespace Service
                             RequiredDate = Convert.ToDateTime(row["RequiredDate"]).ToString("yyyy-MM-dd"),
                             ShippedDate = Convert.ToDateTime(row["ShippedDate"]).ToString("yyyy-MM-dd"),
 
+                            Freight = row["Freight"].ToString(),
                             ShipAddress = row["ShipAddress"].ToString(),
                             ShipCity = row["ShipCity"].ToString(),
                             ShipCountry = row["ShipCountry"].ToString(),
@@ -149,6 +151,7 @@ namespace Service
                             RequiredDate = Convert.ToDateTime(row["RequiredDate"]).ToString("yyyy-MM-dd"),
                             ShippedDate = Convert.ToDateTime(row["ShippedDate"]).ToString("yyyy-MM-dd"),
 
+                            Freight = row["Freight"].ToString(),
                             ShipAddress = row["ShipAddress"].ToString(),
                             ShipCity = row["ShipCity"].ToString(),
                             ShipCountry = row["ShipCountry"].ToString(),

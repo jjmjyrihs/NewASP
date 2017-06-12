@@ -63,13 +63,12 @@ namespace DB.Controllers
                     Data.CpyName = LData[0].CpyName;
                     Data.OrderId = ID;
 
-                    int i = 1999;
+                    /*int i = 1999;
                     int j = 1999999;
                     string ii = "1999";
                     string jj = "199999999";
-
                     ii = string.Format("{0:$#,###.##}", ii);
-                    string.Format("{0:$#,###.##}", jj);
+                    string.Format("{0:$#,###.##}", jj);*/
 
 
 

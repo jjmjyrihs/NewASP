@@ -5,66 +5,82 @@
 }
 @using (Html.BeginForm("Index", "Inquire", FormMethod.Post))
 {
-    <table style="border:3px #cccccc solid;" cellpadding="10" border="1" align="center">
+    <table style="border:3px #cccccc solid; text-align:center" cellpadding="10" border="1" align="center">
         <tr>
-            <td>訂單編號</td>
-            <td colspan="3">1001</td>
+            <td colspan="5">新增訂單</td>
         </tr>
         <tr>
             <td>客戶名稱</td>
-            <td colspan="3">我</td>
+            <td colspan="4">@Html.DropDownList("CustName", (List<SelectListItem>)ViewBag.Cust)</td>
         </tr>
         <tr>
             <td>負責員工</td>
-            <td colspan="3">你</td>
+            <td colspan="4">@Html.DropDownList("EmpName", (List<SelectListItem>)ViewBag.EmpName)</td>
         </tr>
         <tr>
             <td>訂單日期</td>
-            <td>22</td>
+            <td><input type="date" name="OrderDate"  />
             <td>需要日期</td>
-            <td>33</td>
+            <td colspan="2"><input type="date" name="RequiredDate"  /></td>
         </tr>
         <tr>
             <td>出貨日期</td>
-            <td>44</td>
+            <td><input type="date" name="ShippedDate"  /></td>
             <td>運費</td>
-            <td>55</td>
+            <td colspan="2"><input type="text" name="Freight"  /></td>
         </tr>
         <tr>
             <td>出貨公司名稱</td>
-            <td colspan="3">他</td>
+            <td colspan="4">@Html.DropDownList("CpyName", (List<SelectListItem>)ViewBag.CpyName)</td>
         </tr>
         <tr>
             <td>出貨國家</td>
-            <td>水</td>
+            <td>@Html.TextBox("ShipCountry")</td>
             <td>出貨城市</td>
-            <td>火</td>
+            <td colspan="2">@Html.TextBox("ShipCity")</td>
         </tr>
         <tr>
             <td>出貨地區</td>
-            <td>金</td>
+            <td>@Html.TextBox("ShipRegion")</td>
             <td>郵遞區號</td>
-            <td>木</td>
+            <td colspan="2">@Html.TextBox("ShipPostalCode")</td>
         </tr>
         <tr>
             <td>出貨地址</td>
-            <td>土</td>
+            <td>@Html.TextBox("ShipAddress")</td>
             <td>出貨說明</td>
-            <td>好</td>
+            <td colspan="2">@Html.TextBox("Content")</td>
         </tr>
         <tr>
-            <td>訂單金額總計</td>
-            <td colspan="3">50000</td>
-        </tr>
-        <tr>
-            <td>dd</td>
-            <td colspan="3">
-                gg
-                tt
-            </td>
+            <td colspan="2">訂單金額總計</td>
+            <td align="right" colspan="3">50000</td>
         </tr>
         <tr>
             <td><input type="button" onclick="javascript:window.history.go(-1);" value="返回上一頁"></td>
+            <td colspan="4">
+                <input type="submit" name="submit" value="存檔" />
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="5">訂單明細</td>
+        </tr>
+        <tr>
+            <td colspan="5">新增商品</td>
+        </tr>
+        <tr>
+            <td>商品</td>
+            <td>單價</td>
+            <td>數量</td>
+            <td>小計</td>
+            <td>按鈕</td>
+        </tr>
+        <tr>
+            <td>test</td>
+            <td><input type="text"/></td>
+            <td><input type="text" /></td>
+            <td><span>dd</span></td>
+            <td><input type="button"/></td>
         </tr>
     </table>
 }
