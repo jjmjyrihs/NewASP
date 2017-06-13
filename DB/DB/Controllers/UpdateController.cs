@@ -96,8 +96,6 @@ namespace DB.Controllers
 
 
 
-
-
         public void DropDownListMakeCpy(List<Model.Data> Drop, Model.Data Data)
         {
             List<SelectListItem> CpyName = new List<SelectListItem>();

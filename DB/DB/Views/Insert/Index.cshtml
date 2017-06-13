@@ -3,15 +3,113 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("Index", "Inquire", FormMethod.Post))
+
+
+
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    function displayResult() {
+        var Pdt = '@Ajax.JavaScriptStringEncode(Html.DropDownList("Pdt", (List<SelectListItem>)ViewBag.Pdt).ToHtmlString())';
+
+
+        s = Pdt.replace(/&quot;/g, "\"");
+        alert(s);
+        /*var temp = document.createElement("div");
+        temp.innerHTML = Pdt;
+        var output = temp.innerText || temp.textContent;
+        alert(output);
+        alert(document.getElementsByName("Pdt").value());*/
+        document.getElementById("myTable").insertRow(-1).innerHTML = '<td>' + decodeHtml + '</td><td><input type="text" name="UnitPrice" /></td><td><input type="text" name="Qty" /></td><td>500</td><td><input type="button" value="取消"/></td>';
+        
+                
+    }
+</script>
+
+
+<script>
+    var HtmlUtil = {
+             /*1.用浏览器内部转换器实现html转码*/
+      htmlEncode: function (html) {
+                     //1.首先动态创建一个容器标签元素，如DIV
+                     var temp = document.createElement("div");
+                     //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+            (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+                    //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+                     var output = temp.innerHTML;
+                     temp = null;
+                     return output;
+            
+        },
+             /*2.用浏览器内部转换器实现html解码*/
+      htmlDecode: function (text) {
+          alert(text);
+                     //1.首先动态创建一个容器标签元素，如DIV
+                     var temp = document.createElement("div");
+                     //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+                     temp.innerHTML = text;
+                     
+                     //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+                     var output = temp.innerText || temp.textContent;
+                     
+                     temp = null;
+                     return output;
+            
+        }
+};
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@using (Html.BeginForm("Insert", "Insert", FormMethod.Post))
 {
-    <table style="border:3px #cccccc solid; text-align:center" cellpadding="10" border="1" align="center">
+    <table style="border:3px #cccccc solid; text-align:center" cellpadding="10" border="1" align="center" id="myTable">
         <tr>
             <td colspan="5">新增訂單</td>
         </tr>
         <tr>
             <td>客戶名稱</td>
             <td colspan="4">@Html.DropDownList("CustName", (List<SelectListItem>)ViewBag.Cust)</td>
+            
         </tr>
         <tr>
             <td>負責員工</td>
@@ -66,7 +164,7 @@
             <td colspan="5">訂單明細</td>
         </tr>
         <tr>
-            <td colspan="5">新增商品</td>
+            <td colspan="5"><input type="button" onclick="displayResult()" value="Insert new row" /></td>
         </tr>
         <tr>
             <td>商品</td>
@@ -76,11 +174,7 @@
             <td>按鈕</td>
         </tr>
         <tr>
-            <td>test</td>
-            <td><input type="text"/></td>
-            <td><input type="text" /></td>
-            <td><span>dd</span></td>
-            <td><input type="button"/></td>
+            
         </tr>
     </table>
 }

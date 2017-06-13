@@ -13,7 +13,7 @@ namespace DB.Controllers
             Service.SQL_Inquire_Cpy SIC = new Service.SQL_Inquire_Cpy();
             Service.SQL_Inquire_Emp SIE = new Service.SQL_Inquire_Emp();
             Service.SQL_Inquire_Cust SICU = new Service.SQL_Inquire_Cust();
-
+            Service.SQL_Inquire_Pdt SIP = new Service.SQL_Inquire_Pdt();
 
             List<Model.Data> Drop = new List<Model.Data>();
 
@@ -28,6 +28,11 @@ namespace DB.Controllers
             Drop = new List<Model.Data>();
             Drop = SICU.GetData("");
             DropDownListMakeCust(Drop);
+
+            Drop = new List<Model.Data>();
+            Drop = SIP.GetData();
+            DropDownListMakePdt(Drop);
+
             return View();            
         }
 
@@ -52,6 +57,26 @@ namespace DB.Controllers
             ViewBag.CpyName = CpyName;
         }
 
+        public ActionResult Insert(string Pdt)
+        {
+
+            return null;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public void DropDownListMakeEmp(List<Model.Data> Drop)
         {
@@ -75,14 +100,15 @@ namespace DB.Controllers
         public void DropDownListMakeCust(List<Model.Data> Drop)
         {
             List<SelectListItem> Cust = new List<SelectListItem>();
-
-            for (int i = 0; i < Drop.Count; i++)
-            {
                 Cust.Add(new SelectListItem()
                 {
                     Text = "無",
                     Value = "null"
                 });
+
+            for (int i = 0; i < Drop.Count; i++)
+            {
+
                 string re = Drop[i].CustName.Replace("Customer ", "");
                 Cust.Add(new SelectListItem()
                 {
@@ -91,6 +117,22 @@ namespace DB.Controllers
                 });
             }
             ViewBag.Cust = Cust;
+        }
+
+        public void DropDownListMakePdt(List<Model.Data> Drop)
+        {
+            List<SelectListItem> Pdt = new List<SelectListItem>();
+
+            for (int i = 0; i < Drop.Count; i++)
+            {
+                string re = Drop[i].ProductName.Replace("Product ", "");
+                Pdt.Add(new SelectListItem()
+                {
+                    Text = re,
+                    Value = Drop[i].ProductID
+                });
+            }
+            ViewBag.Pdt = Pdt;
         }
     }
 }
