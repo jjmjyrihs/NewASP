@@ -44,6 +44,23 @@
         $(id).text(Subtotal);
     }
 
+    function Check() {
+        var CustName = $("#CustName option:selected").text();
+        var EmpName = $("#EmpName option:selected").text();
+        var OrderDate = $("#OrderDate").val();
+        var RequiredDate = $("#RequiredDate").val();
+        if (CustName == "無") {
+            alert("客戶名稱未選擇!");
+        } else if (EmpName == "無") {
+            alert("負責員工未選擇!");
+        } else if (OrderDate == "") {
+            alert("訂購日期未選擇!");
+        } else if (RequiredDate == "") {
+            alert("需要日期未選擇!");
+        } else {
+            document.getElementById("myForm").submit();
+        }
+    }
 </script>
 
 <script>
@@ -78,8 +95,8 @@
 };*/
 </script>
 
-@using (Html.BeginForm("Insert", "Insert", FormMethod.Post))
-{    
+@using (Html.BeginForm("Insert", "Insert", FormMethod.Post, new { id="myForm"}))
+{
     <table style="border:3px #cccccc solid; text-align:center" cellpadding="10" border="1" align="center" id="myTable" >
         <tr>
             <td colspan="5" id="two">新增訂單</td>
@@ -95,9 +112,9 @@
         </tr>
         <tr>
             <td>訂單日期</td>
-            <td><input type="date" name="OrderDate"  />
+            <td><input type="date" name="OrderDate"  id="OrderDate" />
             <td>需要日期</td>
-            <td colspan="2"><input type="date" name="RequiredDate"  /></td>
+            <td colspan="2"><input type="date" name="RequiredDate" id="RequiredDate" /></td>
         </tr>
         <tr>
             <td>出貨日期</td>
@@ -134,7 +151,7 @@
         <tr>
             <td><input type="button" onclick="javascript:window.history.go(-1);" value="返回上一頁"></td>
             <td colspan="4">
-                <input type="submit" name="submit" value="存檔" />
+                <input type="button" onclick="Check()" value="存檔"/>
             </td>
         </tr>
 

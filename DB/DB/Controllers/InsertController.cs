@@ -43,9 +43,63 @@ namespace DB.Controllers
             return View();            
         }
 
-        public ActionResult Insert(Model.Data Data)
+        public ActionResult Insert(Model.Data Data,string[] Pdt, string[] UnitPrice, string[] Qty)
         {
 
+            Service.SQL_Inquire SI = new Service.SQL_Inquire();
+            Service.SQL_Insert SIt = new Service.SQL_Insert();
+
+            List<Model.Data> LData = new List<Model.Data>();
+
+            Model.Data NData = new Model.Data();
+
+            NData.CustomerID = Data.CustName;
+            NData.EmployeeID = "null";
+            NData.ShipperID = "null";
+            LData = SI.GetData(NData);
+            Data.CustName = LData[0].CustName;
+            Data.CustomerID = LData[0].CustomerID;
+
+            NData = new Model.Data();
+            NData.EmployeeID = Data.EmpName;
+            NData.ShipperID = "null";
+            LData = SI.GetData(NData);
+            Data.EmpName = LData[0].EmpName;
+            Data.EmployeeID = LData[0].EmployeeID;
+
+            NData = new Model.Data();
+            NData.ShipperID = Data.CpyName;
+            NData.EmployeeID = "null";
+            LData = SI.GetData(NData);
+            if (Data.CpyName == "null")
+            {
+                Data.CpyName = "無";
+                Data.ShipperID = "";
+            }
+            else
+            {
+                Data.CpyName = LData[0].CpyName;
+                Data.ShipperID = LData[0].ShipperID;
+            }
+            if (Data.ShipCountry == null)
+            {
+                Data.ShipCountry = "無";
+            }
+            if (Data.Freight == null)
+            {
+                Data.Freight = "0";
+            }
+            Data.Freight = "100";
+            if (Data.ShipAddress == null)
+            {
+                Data.ShipAddress = "無";
+            }
+            if (Data.ShipCity == null)
+            {
+                Data.ShipCity = "無";
+            }
+            
+            SIt.Insert(Data);
             return null;
         }
 
