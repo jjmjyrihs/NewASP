@@ -44,40 +44,36 @@ namespace DB.Controllers
                     Service.SQL_Update SU = new Service.SQL_Update();
                     List<Model.Data> LData = new List<Model.Data>();
                     Model.Data NData = new Model.Data();
-                    NData.CustomerID = Data.CustomerID;
+                    NData.CustomerID = Data.CustName;
                     NData.EmployeeID = "null";
                     NData.ShipperID = "null";
                     LData = SI.GetData(NData);
                     Data.CustName = LData[0].CustName;
+                    Data.CustomerID = LData[0].CustomerID;
 
                     NData = new Model.Data();
-                    NData.EmployeeID = Data.EmployeeID;
+                    NData.EmployeeID = Data.EmpName;
                     NData.ShipperID = "null";
                     LData = SI.GetData(NData);
                     Data.EmpName = LData[0].EmpName;
+                    Data.EmployeeID = LData[0].EmployeeID;
 
                     NData = new Model.Data();
-                    NData.ShipperID = Data.ShipperID;
+                    NData.ShipperID = Data.CpyName;
                     NData.EmployeeID = "null";
                     LData = SI.GetData(NData);
                     Data.CpyName = LData[0].CpyName;
-                    Data.OrderId = ID;
+                    Data.ShipperID = LData[0].ShipperID;
 
-                    /*int i = 1999;
-                    int j = 1999999;
-                    string ii = "1999";
-                    string jj = "199999999";
-                    ii = string.Format("{0:$#,###.##}", ii);
-                    string.Format("{0:$#,###.##}", jj);*/
-
-
-
+                    Data.OrderId = ID;                    
                     SU.Update(Data);
 
-                    return null;
+                    //return RedirectToAction("index","Inquire", new { ID = ID});
+                    return RedirectToAction("index", "Inquire", new { OrderId = ID , ShipperID = "null", EmployeeID = "null" });
                 case "刪除本筆訂單":
-
-                    return null;
+                    Service.SQL_Delete SD = new Service.SQL_Delete();
+                    SD.Delete(ID);
+                    return RedirectToAction("Index", "Inquire", new { OrderId = Data.OrderId });
             }
             return null;
         }

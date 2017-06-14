@@ -4,35 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
-
-
-
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     function displayResult() {
-        var Pdt = '@Ajax.JavaScriptStringEncode(Html.DropDownList("Pdt", (List<SelectListItem>)ViewBag.Pdt).ToHtmlString())';
-
-
-        s = Pdt.replace(/&quot;/g, "\"");
-        alert(s);
-        /*var temp = document.createElement("div");
-        temp.innerHTML = Pdt;
-        var output = temp.innerText || temp.textContent;
-        alert(output);
-        alert(document.getElementsByName("Pdt").value());*/
-        document.getElementById("myTable").insertRow(-1).innerHTML = '<td>' + decodeHtml + '</td><td><input type="text" name="UnitPrice" /></td><td><input type="text" name="Qty" /></td><td>500</td><td><input type="button" value="取消"/></td>';
-        
-                
+        var num = document.getElementById("myTable").rows.length;
+        var Pdt = '@Ajax.JavaScriptStringEncode(Html.DropDownList("Pdt", (List<SelectListItem>)ViewBag.Pdt, new { onchange = "ChangePrice(this.id);" }).ToHtmlString())';
+        Pdt = Pdt.replace(/&quot;/g, "\"");
+        var NewPdt = Pdt.substring(0, 12) + "pdt" + num + Pdt.substring(15, Pdt.length);
+        document.getElementById("myTable").insertRow(-1).innerHTML = '<td id="' + num + '">' + NewPdt + '</td><td id="'+num+'"><input type="text" name="UnitPrice" value="18.0000" id = "P'+num+'" style = "text-align:right" /></td><td id="' + num + '"><input type="text" name="Qty" value="1" style = "text-align:right" /></td><td id="' + num +'" style = "text-align:right">500</td><td id="'+num+'"><input type="button" id="'+num+'" onclick="Delete(this.id)" value="取消"/></td>';
     }
+
+    function Delete(id) {
+        var ID = "#" + id;                
+        for (var i = 0; i < 6; i++) {
+            $(ID).remove();
+        }
+    }
+
+    function ChangePrice(id) {
+        var GetVal = "#" + id + " option:selected";                
+        var Price = GetPrice(($(GetVal).val()));
+        var ID = "#P" + id.substring(3, id.length);            
+        $(ID).prop("value", Price);
+    }
+
+    function GetPrice(id) {
+        var array = @Html.Raw(Json.Encode(@ViewBag.Price));
+        return (array[id]);
+    }
+
 </script>
 
-
 <script>
-    var HtmlUtil = {
-             /*1.用浏览器内部转换器实现html转码*/
+/*    var HtmlUtil = {
+             1.用浏览器内部转换器实现html转码
       htmlEncode: function (html) {
                      //1.首先动态创建一个容器标签元素，如DIV
                      var temp = document.createElement("div");
@@ -44,7 +49,7 @@
                      return output;
             
         },
-             /*2.用浏览器内部转换器实现html解码*/
+             2.用浏览器内部转换器实现html解码
       htmlDecode: function (text) {
           alert(text);
                      //1.首先动态创建一个容器标签元素，如DIV
@@ -59,52 +64,14 @@
                      return output;
             
         }
-};
-
+};*/
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @using (Html.BeginForm("Insert", "Insert", FormMethod.Post))
-{
-    <table style="border:3px #cccccc solid; text-align:center" cellpadding="10" border="1" align="center" id="myTable">
+{    
+    <table style="border:3px #cccccc solid; text-align:center" cellpadding="10" border="1" align="center" id="myTable" >
         <tr>
-            <td colspan="5">新增訂單</td>
+            <td colspan="5" id="two">新增訂單</td>
         </tr>
         <tr>
             <td>客戶名稱</td>
@@ -173,8 +140,6 @@
             <td>小計</td>
             <td>按鈕</td>
         </tr>
-        <tr>
-            
-        </tr>
+
     </table>
 }

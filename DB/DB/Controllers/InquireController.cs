@@ -9,7 +9,7 @@ namespace DB.Controllers
     public class InquireController : Controller
     {
         // GET: Inquire
-        public ActionResult Index(Model.Data Data)
+        public ActionResult Index(Model.Data Data, string ID)
         {
             Service.SQL_Inquire SI = new Service.SQL_Inquire();
             List<Model.Data> GetData = new List<Model.Data>();

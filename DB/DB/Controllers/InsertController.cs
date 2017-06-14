@@ -33,7 +33,20 @@ namespace DB.Controllers
             Drop = SIP.GetData();
             DropDownListMakePdt(Drop);
 
+            string[] Price = new string[(Drop.Count+1)];
+            for (int i = 1; i < Price.Length; i++)
+            {
+                Price[i] = Drop[i - 1].UnitPrice.ToString();
+            }
+            ViewBag.Price = Price;
+
             return View();            
+        }
+
+        public ActionResult Insert(Model.Data Data)
+        {
+
+            return null;
         }
 
         public void DropDownListMakeCpy(List<Model.Data> Drop)
@@ -56,27 +69,6 @@ namespace DB.Controllers
 
             ViewBag.CpyName = CpyName;
         }
-
-        public ActionResult Insert(string Pdt)
-        {
-
-            return null;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public void DropDownListMakeEmp(List<Model.Data> Drop)
         {
