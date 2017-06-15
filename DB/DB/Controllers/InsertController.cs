@@ -30,7 +30,7 @@ namespace DB.Controllers
             DropDownListMakeCust(Drop);
 
             Drop = new List<Model.Data>();
-            Drop = SIP.GetData();
+            Drop = SIP.GetData("");
             DropDownListMakePdt(Drop);
 
             string[] Price = new string[(Drop.Count+1)];
@@ -99,8 +99,18 @@ namespace DB.Controllers
                 Data.ShipCity = "無";
             }
             
-            SIt.Insert(Data);
-            return null;
+            Data.OrderId = SIt.Insert(Data);
+            if (Pdt != null)
+            {
+                for (int i = 0; i < Pdt.Length; i++)
+                {
+                    Data.ProductID = Pdt[i];
+                    Data.UnitPrice = UnitPrice[i];
+                    Data.Qty = Qty[i];
+                    SIt.Product(Data);
+                }
+            }            
+            return RedirectToAction("index", "Inquire", new { OrderId = Data.OrderId, ShipperID = "null", EmployeeID = "null" });
         }
 
         public void DropDownListMakeCpy(List<Model.Data> Drop)

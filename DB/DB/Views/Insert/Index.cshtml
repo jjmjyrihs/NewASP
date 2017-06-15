@@ -11,7 +11,7 @@
         var Pdt = '@Ajax.JavaScriptStringEncode(Html.DropDownList("Pdt", (List<SelectListItem>)ViewBag.Pdt, new { onchange = "ChangePrice(this.id);" }).ToHtmlString())';
         Pdt = Pdt.replace(/&quot;/g, "\"");
         var NewPdt = Pdt.substring(0, 12) + "pdt" + num + Pdt.substring(15, Pdt.length);
-        document.getElementById("myTable").insertRow(-1).innerHTML = '<td id="' + num + '">' + NewPdt + '</td><td id="' + num + '"><input type="text" name="UnitPrice" value="18.0000" id = "P' + num + '" style = "text-align:right" /></td><td id="' + num + '"><input type="text" name="Qty" value="1" style = "text-align:right" id="Q' + num + '" onchange = "ChangeQty(this.id, this.value);" /></td><td style = "text-align:right"><span id="S' + num +'">18</span></td><td id="'+num+'"><input type="button" id="'+num+'" onclick="Delete(this.id)" value="取消"/></td>';
+        document.getElementById("myTable").insertRow(-1).innerHTML = '<td id="' + num + '">' + NewPdt + '</td><td id="' + num + '"><input type="text" name="UnitPrice" value="18.0000" id = "P' + num + '" style = "text-align:right" /></td><td id="' + num + '"><input type="text" name="Qty" value="1" style = "text-align:right" id="Q' + num + '" onchange = "ChangeQty(this.id, this.value);" /></td><td id="' + num + '" style = "text-align:right"><span id="S' + num +'">18</span></td><td id="'+num+'"><input type="button" id="'+num+'" onclick="Delete(this.id)" value="取消"/></td>';
     }
 
     function Delete(id) {
