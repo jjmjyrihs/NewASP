@@ -25,5 +25,33 @@ namespace Service
                 conn.Close();
             }
         }
+
+        public void Product(Model.Data Data)
+        {
+            string sql = "insert into Sales.OrderDetails(OrderId, ProductID, UnitPrice, Qty, Discount) values('" + Data.OrderId + "','" + Data.ProductID + "','" + Data.UnitPrice + "','" + Data.Qty + "','0.000')";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBconn"].ConnectionString);
+            using (conn)
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public void Delete(string OrderId)
+        {
+            string sql = "delete from Sales.OrderDetails where OrderId = '"+OrderId+"'";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBconn"].ConnectionString);
+            using (conn)
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
     }
 }

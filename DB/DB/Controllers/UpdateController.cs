@@ -50,15 +50,25 @@ namespace DB.Controllers
             return View();
         }
 
-        public ActionResult Update(Model.Data Data, string ID, string submit)
+        public ActionResult Update(Model.Data Data, string ID, string submit, string[] Pdt, string[] UnitPrice, string[] Qty)
         {
+            if (submit == "true")
+            {
+                submit = "存檔";
+            }
+            else
+            {
+                submit = "刪除本筆訂單";
+            }
             switch (submit)
             {
                 case "存檔":
                     Service.SQL_Inquire SI = new Service.SQL_Inquire();
                     Service.SQL_Update SU = new Service.SQL_Update();
+                    Service.SQL_Insert SIt = new Service.SQL_Insert();
                     List<Model.Data> LData = new List<Model.Data>();
                     Model.Data NData = new Model.Data();
+
                     NData.CustomerID = Data.CustName;
                     NData.EmployeeID = "null";
                     NData.ShipperID = "null";
@@ -83,7 +93,20 @@ namespace DB.Controllers
                     Data.OrderId = ID;                    
                     SU.Update(Data);
 
-                    //return RedirectToAction("index","Inquire", new { ID = ID});
+
+                    SU.Delete(Data.OrderId);
+                    if (Pdt != null)
+                    {
+                        for (int i = 0; i < Pdt.Length; i++)
+                        {
+                            Data.ProductID = Pdt[i];
+                            Data.UnitPrice = UnitPrice[i];
+                            Data.Qty = Qty[i];
+                            SIt.Product(Data);
+                        }
+                    }
+
+
                     return RedirectToAction("index", "Inquire", new { OrderId = ID , ShipperID = "null", EmployeeID = "null" });
                 case "刪除本筆訂單":
                     Service.SQL_Delete SD = new Service.SQL_Delete();

@@ -77,9 +77,17 @@ namespace Service
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    sql = "update Sales.Orders set ";
+                }
                 conn.Close();
             }
         }
+
     }
 }
